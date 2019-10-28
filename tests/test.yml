@@ -6,8 +6,8 @@
   tasks:
   - name: launch ansible cloudformation example
     cloudformation: >
-      stack_name="ansible-cloudformation-1" state=present
-      region=us-east-1 disable_rollback=true
+      stack_name="{{ StackName }}" state=present
+      region="{{ Region }}" disable_rollback=true
       template=../files/cloudformation-example.json
     args:
       template_parameters:
