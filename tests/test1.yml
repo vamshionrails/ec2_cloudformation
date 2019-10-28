@@ -1,0 +1,23 @@
+---
+- hosts: "localhost"
+  connection: "local"
+  gather_facts: false
+
+  vars:
+    KeyName: "MyEC2"
+    InstanceType: "t2.micro"
+    SSHLocation: "0.0.0.0/0"
+
+  tasks:
+   - name: create a stack, pass in the template via an URL
+  cloudformation:
+    stack_name: "ansible-cloudformation"
+    state: present
+    region: us-east-1
+    disable_rollback: true
+    template: ../templates/EC2InstanceSecurity.template"
+    template_parameters:
+      KeyName: jmartin
+      DiskType: ephemeral
+      InstanceType: m1.small
+      ClusterSize: 3

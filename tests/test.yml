@@ -1,0 +1,18 @@
+- name: provision stack
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+  - name: launch ansible cloudformation example
+    cloudformation: >
+      stack_name="ansible-cloudformation-1" state=present
+      region=us-east-1 disable_rollback=true
+      template=../files/cloudformation-example.json
+    args:
+      template_parameters:
+        KeyName: "{{ KeyName }}"
+        InstanceType: "{{ InstanceType }}"
+    register: stack
+  - name: show stack outputs
+    debug: msg="My stack outputs are {{stack.stack_outputs}}"
