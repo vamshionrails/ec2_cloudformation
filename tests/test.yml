@@ -8,7 +8,7 @@
     cloudformation: >
       stack_name="{{ StackName }}" state=present
       region="{{ Region }}" disable_rollback=true
-      template=../files/cloudformation-example.json
+      template="../files/{{ Templates }}"
     args:
       template_parameters:
         KeyName: "{{ KeyName }}"
